@@ -7,7 +7,7 @@
 ## Run
 
 ```bash
-git clone ...
+git clone https://gitea.kood.tech/hoangphuocvu/interface
 cd art-interface
 go run ./cmd/web --addr :8080
 ```
