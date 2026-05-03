@@ -8,7 +8,7 @@
 
 ```bash
 git clone https://gitea.kood.tech/hoangphuocvu/interface
-cd art-interface
+cd interface
 go run ./cmd/web --addr :8080
 ```
 
@@ -36,13 +36,12 @@ Choose **Encode** in the UI radio button. The server uses `art-decoder/utils.Enc
 Colorized the output when *Decoding* using RGB in HTML format. Off by default. Enable with `--paint`:
 
 ```bash
-cd art-interface
 go run ./cmd/web --addr :8080 --paint
 ```
 
 ### CSS: 
 
-Styling is served from `./art-interface/cmd/web/assets/static/styles.css`.
+Styling is served from `./cmd/web/assets/static/styles.css`.
 
 ### Use of formatting: 
 
