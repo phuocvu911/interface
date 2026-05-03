@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>art-decoder — web studio</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="bg"></div>
+    <main class="wrap">
+      <header class="header">
+        <div class="brand">
+          <div class="logo">ad</div>
+          <div class="titles">
+            <div class="title">art-decoder</div>
+            <div class="subtitle">Turn compact strings into big, bold ASCII art.</div>
+          </div>
+        </div>
+        <div class="status">
+          <div class="statusLabel">Latest response</div>
+          <div class="statusCode code-{{.StatusCode}}">
+            <span class="pill">{{.StatusCode}}</span>
+            <span class="text">{{.StatusText}}</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="panel">
+        <form class="form" action="/decoder" method="post">
+          <div class="modes">
+            <label class="radio">
+              <input type="radio" name="mode" value="decode" {{if eq .Mode "decode"}}checked{{end}} />
+              <span>Decode</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="mode" value="encode" {{if eq .Mode "encode"}}checked{{end}} />
+              <span>Encode</span>
+            </label>
+          </div>
+
+          <label class="label" for="data">Your string</label>
+          <textarea
+            id="data"
+            name="data"
+            class="input"
+            placeholder='Example: [5 #][5 -_]-[5 #]'
+            rows="6"
+            spellcheck="false"
+            autocomplete="off"
+          >{{.Input}}</textarea>
+
+          <div class="actions">
+            <button class="btn" type="submit">Generate</button>
+            <div class="hint">
+              Tip: start with <code>[9 @]</code> or paste a whole line of encoded art.
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel outputPanel">
+        <div class="outputHeader">
+          <div class="outputTitle">Output</div>
+          {{if .Error}}
+            <div class="error">Error: {{.Error}}</div>
+          {{else}}
+            <div class="ok">Ready.</div>
+          {{end}}
+        </div>
+
+        {{if .OutputHTML}}
+          <pre class="art artPaint">{{.OutputHTML}}</pre>
+        {{else}}
+          <pre class="art">{{.Output}}</pre>
+        {{end}}
+      </section>
+
+      <footer class="footer">
+        Powered by Go on the server. Encoding and decoding happen on the server. By Hoang.
+      </footer>
+    </main>
+  </body>
+</html>
+
