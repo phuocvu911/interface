@@ -50,8 +50,9 @@ func main() {
 			return
 		}
 		if r.Method != http.MethodGet {
-			w.Header().Set("Allow", http.MethodGet)
-			http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
+			//w.WriteHeader(http.StatusMethodNotAllowed)  //silent
+			w.Header().Set("Allow", http.MethodGet) //respond with Allow GET only
+			http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed) //and print code 405: method not allow.
 			return
 		}
 
