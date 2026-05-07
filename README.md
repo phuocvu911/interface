@@ -9,8 +9,10 @@
 ```bash
 git clone https://gitea.kood.tech/hoangphuocvu/interface
 cd interface
-go run ./cmd/web --addr :8080
+go run ./cmd/web
 ```
+
+The default port is `8080`.
 
 Open `http://localhost:8080`.
 
@@ -36,7 +38,7 @@ Choose **Encode** in the UI radio button. The server uses `art-decoder/utils.Enc
 Colorized the output when *Decoding* using RGB in HTML format. Off by default. Enable with `--paint`:
 
 ```bash
-go run ./cmd/web --addr :8080 --paint
+go run ./cmd/web --paint
 ```
 
 ### CSS: 
@@ -56,3 +58,7 @@ The text box supports **multiple lines**. The server processes input **line-by-l
   - If **all** lines decode successfully, it returns **202 Accepted**.
 - **Encode**: each line is encoded independently and `POST /decoder` returns **202 Accepted**.
 
+## Design Notes
+
+- `POST /decoder` handle both decoding and encoding functionality. The `decoderHandler` function receives mode data from webUI and decide which operation to perform.
+- The result of `POST /decoder` is rendered and appended to the mainpage. In another words, there is no `GET /decoder`.
