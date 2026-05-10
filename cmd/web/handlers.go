@@ -1,6 +1,7 @@
 package main
 
 import (
+	m "art-interface/cmd/web/model"
 	"embed"
 	"html/template"
 	"net/http"
@@ -27,7 +28,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//initial page load with empty form and status 200 OK. Default mode is decode.
-	render(w, tpl, http.StatusOK, pageData{
+	render(w, tpl, http.StatusOK, m.PageData{
 		Mode:       "decode",
 		StatusCode: http.StatusOK,
 		StatusText: http.StatusText(http.StatusOK),
@@ -42,7 +43,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := r.ParseForm(); err != nil {
-		render(w, tpl, http.StatusBadRequest, pageData{
+		render(w, tpl, http.StatusBadRequest, m.PageData{
 			Mode:       "decode",
 			StatusCode: http.StatusBadRequest,
 			StatusText: http.StatusText(http.StatusBadRequest),
@@ -60,7 +61,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 	//respond with a 400 Bad Request and an error message in the UI rather than processing it and
 	//potentially returning a 500 Internal Server Error or some other unexpected result.
 	if mode != "decode" && mode != "encode" {
-		render(w, tpl, http.StatusBadRequest, pageData{
+		render(w, tpl, http.StatusBadRequest, m.PageData{
 			Mode:       "decode",
 			Input:      input,
 			StatusCode: http.StatusBadRequest,
@@ -78,7 +79,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 		out = processLinesEncode(input)
 	case "decode":
 		if input == "" {
-			render(w, tpl, http.StatusBadRequest, pageData{
+			render(w, tpl, http.StatusBadRequest, m.PageData{
 				Mode:       mode,
 				StatusCode: http.StatusBadRequest,
 				StatusText: http.StatusText(http.StatusBadRequest),
@@ -93,7 +94,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 		out = decodedText
 	}
 
-	render(w, tpl, status, pageData{
+	render(w, tpl, status, m.PageData{
 		Mode:       mode,
 		Input:      input,
 		Output:     out,

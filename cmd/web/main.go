@@ -11,17 +11,8 @@ import (
 	"time"
 
 	u "art-decoder/utils"
+	m "art-interface/cmd/web/model"
 )
-
-type pageData struct {
-	Mode       string
-	Input      string
-	Output     string
-	OutputHTML template.HTML
-	StatusCode int
-	StatusText string
-	Error      string
-}
 
 func main() {
 	flag.Parse()
@@ -51,7 +42,7 @@ func main() {
 	log.Fatal(srv.ListenAndServe())
 }
 
-func render(w http.ResponseWriter, tpl *template.Template, status int, data pageData) {
+func render(w http.ResponseWriter, tpl *template.Template, status int, data m.PageData) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(status)
 	if err := tpl.Execute(w, data); err != nil {
