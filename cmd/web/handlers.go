@@ -110,7 +110,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 func render(w http.ResponseWriter, tpl *template.Template, status int, data m.PageData) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(status)
-	if err := tpl.Execute(w, data); err != nil {
+	if err := tpl.Execute(w, data); err != nil { //Execute the template with the provided data and write the output to the response writer w using reflection: Mode -> {{.Mode}}, Input -> {{.Input}}, Output -> {{.Output}}, etc.
 		log.Printf("Error rendering template: %v", err)
 	}
 }
