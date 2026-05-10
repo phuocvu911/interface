@@ -54,4 +54,4 @@ The text box supports **multiple lines**. The server processes input **line-by-l
 
 - `POST /decoder` handle both decoding and encoding functionality. The `decoderHandler` function receives mode data from webUI and decide which operation to perform.
 - The result of `POST /decoder` is rendered and appended to the mainpage. In another words, there is no `GET /decoder`.
-- The HTML and CSS file is baked into binary and being hold in `embed.FS`. Doing so reduce the work of distributing those WebUI assets seperately. 
+- The HTML and CSS file is baked into binary and being hold in `embed.FS`. Doing so reduce the work of distributing those WebUI assets seperately.

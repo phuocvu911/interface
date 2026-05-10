@@ -1,5 +1,7 @@
 package model
 
+// field names must be exported (start with uppercase) to be accessible in the template.
+// f.e: Mode can be  accessed in the template as {{.Mode}}
 type pageData struct {
 	Mode       string // "encode" or "decode"
 	Input      string // user input from the form

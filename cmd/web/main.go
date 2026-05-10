@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	u "art-decoder/utils"
 )
@@ -39,8 +40,11 @@ func main() {
 	mux.HandleFunc("/decoder", decoderHandler)
 
 	srv := &http.Server{
-		Addr:    *addr,
-		Handler: mux,
+		Addr:         *addr,
+		Handler:      mux,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  120 * time.Second,
 	}
 
 	log.Printf("art-interface web listening on http://localhost%s", *addr)
@@ -50,7 +54,9 @@ func main() {
 func render(w http.ResponseWriter, tpl *template.Template, status int, data pageData) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(status)
-	_ = tpl.Execute(w, data)
+	if err := tpl.Execute(w, data); err != nil {
+		log.Printf("Error rendering template: %v", err)
+	}
 }
 
 func processLinesEncode(input string) string {

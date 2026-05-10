@@ -4,11 +4,14 @@ import (
 	"embed"
 	"html/template"
 	"net/http"
-	"strings"
 )
 
 //go:embed assets/templates/index.html assets/static/styles.css
 var webFS embed.FS
+
+// create new tamplate name "index.html" and parse the index.html file from the embedded
+// filesystem webFS. The template.Must will panic if there is an error parsing the template,
+// which is appropriate here because we want to catch any errors in our templates at startup rather than at runtime when handling requests.
 var tpl = template.Must(template.New("index.html").ParseFS(webFS, "assets/templates/index.html"))
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -23,6 +26,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//initial page load with empty form and status 200 OK. Default mode is decode.
 	render(w, tpl, http.StatusOK, pageData{
 		Mode:       "decode",
 		StatusCode: http.StatusOK,
@@ -47,9 +51,14 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	mode := strings.ToLower(strings.TrimSpace(r.PostFormValue("mode")))
+	mode := r.PostFormValue("mode")
 	input := r.PostFormValue("data")
 
+	//normal case would never reach this block because of radio button.
+	//This is for protect the switch below as someone can send a POST request with curl or
+	//Postman without the mode field or with an invalid mode value. We want to catch that and
+	//respond with a 400 Bad Request and an error message in the UI rather than processing it and
+	//potentially returning a 500 Internal Server Error or some other unexpected result.
 	if mode != "decode" && mode != "encode" {
 		render(w, tpl, http.StatusBadRequest, pageData{
 			Mode:       "decode",
