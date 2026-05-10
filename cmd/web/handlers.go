@@ -1,7 +1,6 @@
 package main
 
 import (
-	u "art-decoder/utils"
 	"embed"
 	"html/template"
 	"net/http"
@@ -63,7 +62,6 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var out string
-	var outHTML template.HTML
 	status := http.StatusAccepted
 	switch mode {
 	case "encode":
@@ -83,18 +81,13 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 		if hadErr {
 			status = http.StatusBadRequest
 		}
-		if *paint && !hadErr {
-			outHTML = template.HTML(u.PaintLineHTML(decodedText))
-		} else {
-			out = decodedText
-		}
+		out = decodedText
 	}
 
 	render(w, tpl, status, pageData{
 		Mode:       mode,
 		Input:      input,
 		Output:     out,
-		OutputHTML: outHTML,
 		StatusCode: status,
 		StatusText: http.StatusText(status),
 	})

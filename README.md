@@ -33,14 +33,6 @@ Any other request returns an appropriate status code (e.g. `404 Not Found`, `405
 
 Choose **Encode** in the UI radio button. The server uses `art-decoder/utils.Encode` (nothing is computed in the browser). It only encodes when doing that actually *reduce* the input length.
 
-### PaintLine (colored output): 
-
-Colorized the output when *Decoding* using RGB in HTML format. Off by default. Enable with `--paint`:
-
-```bash
-go run ./cmd/web --paint
-```
-
 ### CSS: 
 
 Styling is served from `./cmd/web/assets/static/styles.css`.
@@ -62,3 +54,4 @@ The text box supports **multiple lines**. The server processes input **line-by-l
 
 - `POST /decoder` handle both decoding and encoding functionality. The `decoderHandler` function receives mode data from webUI and decide which operation to perform.
 - The result of `POST /decoder` is rendered and appended to the mainpage. In another words, there is no `GET /decoder`.
+- The HTML and CSS file is baked into binary and being hold in `embed.FS`. Doing so reduce the work of distributing those WebUI assets seperately. 
