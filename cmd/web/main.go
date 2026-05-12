@@ -1,24 +1,25 @@
 package main
 
 import (
+	"embed"
 	"flag"
-	"io/fs"
+	"html/template"
 	"log"
 	"net/http"
 	"time"
 )
 
+//go:embed assets/templates/index.html assets/static/styles.css
+var webFS embed.FS
+
+var tpl = template.Must(template.ParseFS(webFS, "assets/templates/index.html"))
+
 func main() {
 	flag.Parse()
 
-	// make public URL shorter, hiding developer detail of file structure and also to prevent directory traversal attack (e.g. /static/../../secret.txt).
-	staticFS, err := fs.Sub(webFS, "assets/static")
-	if err != nil {
-		log.Fatal(err)
-	}
 	mux := http.NewServeMux()
-	// serve style.css so the browser can load it when the HTML references /static/styles.css. The http.FileServerFS will serve files from the staticFS, which is rooted at assets/static, so it can only serve files that are in that directory (e.g. styles.css) and cannot access files outside of it (e.g. assets/templates/index.html or any other file on the system).
-	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServerFS(staticFS)))
+	// serve style.css so the browser can load it when the HTML references /static/styles.css.
+	mux.Handle("/static/styles.css", http.FileServerFS(webFS))
 
 	//hooks up handlers to endpoints
 	mux.HandleFunc("/", homeHandler)

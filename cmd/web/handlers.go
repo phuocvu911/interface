@@ -4,20 +4,11 @@ import (
 	u "art-decoder/utils"
 	m "art-interface/cmd/web/model"
 	"bufio"
-	"embed"
 	"html/template"
 	"log"
 	"net/http"
 	"strings"
 )
-
-//go:embed assets/templates/index.html assets/static/styles.css
-var webFS embed.FS
-
-// create new tamplate name "index.html" and parse the index.html file from the embedded
-// filesystem webFS. The template.Must will panic if there is an error parsing the template,
-// which is appropriate here because we want to catch any errors in our templates at startup rather than at runtime when handling requests.
-var tpl = template.Must(template.ParseFS(webFS, "assets/templates/index.html"))
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
