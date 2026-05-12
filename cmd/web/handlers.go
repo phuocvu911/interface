@@ -77,6 +77,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 
 	var out string
 	status := http.StatusAccepted
+	error := ""
 	switch mode {
 	case "encode":
 		// Empty input is valid for encode (it encodes to empty output).
@@ -94,6 +95,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 		decodedText, hadErr := processLinesDecode(input)
 		if hadErr {
 			status = http.StatusBadRequest
+			error = "One or more lines failed to decode."
 		}
 		out = decodedText
 	}
@@ -104,6 +106,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 		Output:     out,
 		StatusCode: status,
 		StatusText: http.StatusText(status),
+		Error:      error,
 	})
 }
 
@@ -119,7 +122,7 @@ func processLinesEncode(input string) string {
 	var outLines []string
 
 	sc := bufio.NewScanner(strings.NewReader(input))
-	buf := make([]byte, 0, 64*1024)
+	buf := make([]byte, 0, 1024)
 	sc.Buffer(buf, 1024*1024)
 
 	for sc.Scan() {
@@ -137,7 +140,7 @@ func processLinesDecode(input string) (string, bool) {
 	hadErr := false
 
 	sc := bufio.NewScanner(strings.NewReader(input))
-	buf := make([]byte, 0, 64*1024)
+	buf := make([]byte, 0, 1024)
 	sc.Buffer(buf, 1024*1024)
 
 	for sc.Scan() {
