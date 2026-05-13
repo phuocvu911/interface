@@ -49,10 +49,10 @@ The text box supports **multiple lines**. The server processes input **line-by-l
 - **Decode**: each line is decoded independently. If a line is invalid, that output line becomes the literal `Error`.
   - If **any** line fails to decode, `POST /decoder` returns **400 Bad Request** (and the output still shows a mix of decoded lines and `Error` lines).
   - If **all** lines decode successfully, it returns **202 Accepted**.
-- **Encode**: each line is encoded independently and `POST /decoder` returns **202 Accepted**.
+- **Encode**: each line is encoded independently and `POST /decoder` returns **202 Accepted**. `Encode()` did not return any error, so if the user's input has nothing to compress, the output is **identical** with the input, also no `Error` got caught.
 
 ## Design Notes
 
-- `POST /decoder` handle both decoding and encoding functionality. The `decoderHandler` function receives mode data from the form and decide which operation to perform.
-- The result of `POST /decoder` is rendered and appended to the mainpage. In another words, there is no `GET /decoder`.
-- The HTML and CSS file is baked into binary and being hold in `embed.FS` object (got compiled at build time). It brings single file deployment (`art-interface` can be run anywhere), no missing file errors, faster read and tamper-proof for those UI assets.
+- `POST /decoder` handles both decoding and encoding functionality. The `decoderHandler` function receives mode data from the form and decides which operation to perform.
+- The result of `POST /decoder` is rendered and appended to the mainpage. In other words, there is no `GET /decoder`.
+- The HTML and CSS file is baked into binary and being held in `embed.FS` object (got compiled at build time). It brings single-file deployment (`art-interface` can be run anywhere), no missing file errors, faster read and tamper-proof for those UI assets.
