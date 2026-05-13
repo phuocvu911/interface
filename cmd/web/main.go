@@ -4,6 +4,7 @@ import (
 	"embed"
 	"flag"
 	"html/template"
+	"io/fs"
 	"log"
 	"net/http"
 	"time"
@@ -16,10 +17,13 @@ var tpl = template.Must(template.ParseFS(webFS, "assets/templates/index.html"))
 
 func main() {
 	flag.Parse()
-
+	staticFS, err := fs.Sub(webFS, "assets")
+	if err != nil {
+		log.Fatal(err)
+	}
 	mux := http.NewServeMux()
-	// serve style.css so the browser can load it when the HTML references /static/styles.css.
-	mux.Handle("/static/styles.css", http.FileServerFS(webFS))
+	// serve styles.css so the browser can load it when the HTML references /static/styles.css.
+	mux.Handle("/static/", http.FileServerFS(staticFS))
 
 	//hooks up handlers to endpoints
 	mux.HandleFunc("/", homeHandler)
