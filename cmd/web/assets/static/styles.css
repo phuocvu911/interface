@@ -22,6 +22,12 @@ body {
 }
 
 body {
+  transform: scale(2);
+  transform-origin: 0 0; /* Ensures zooming starts from top-left */
+  width: 50%; /* Adjust width to prevent overflow issues */
+}
+
+body {
   margin: 0;
   color: var(--text);
   font-family: var(--sans);
