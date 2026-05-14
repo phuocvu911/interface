@@ -54,9 +54,6 @@ Applies styles to all elements.
 
 | Property | Description |
 |---|---|
-| `transform: scale(2)` | Zooms the entire page to 2x size |
-| `transform-origin: 0 0` | Scaling starts from the top-left corner |
-| `width: 50%` | Compensates for scaling to avoid overflow |
 | `margin: 0` | Removes browser default margin |
 | `color` | Default text color |
 | `font-family` | Default font family |
