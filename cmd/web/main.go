@@ -17,13 +17,13 @@ var tpl = template.Must(template.ParseFS(webFS, "assets/templates/index.html"))
 
 func main() {
 	flag.Parse()
-	staticFS, err := fs.Sub(webFS, "assets")
+	assetsRootFS, err := fs.Sub(webFS, "assets")
 	if err != nil {
 		log.Fatal(err)
 	}
 	mux := http.NewServeMux()
 	// serve styles.css so the browser can load it when the HTML references /static/styles.css.
-	mux.Handle("/static/", http.FileServerFS(staticFS))
+	mux.Handle("/static/", http.FileServerFS(assetsRootFS))
 
 	//hooks up handlers to endpoints
 	mux.HandleFunc("/", homeHandler)
