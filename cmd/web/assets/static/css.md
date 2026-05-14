@@ -277,7 +277,7 @@ Card/panel container.
 
 # Forms
 
-## `.form`
+## `.decoder-form`
 
 | Property | Description |
 |---|---|
@@ -338,7 +338,7 @@ Custom Decode/Encode text
 
 # Labels
 
-## `.label`
+## `.field-label`
 
 | Property | Description |
 |---|---|
@@ -369,7 +369,7 @@ Custom Decode/Encode text
 
 ## `.input:focus`
 
-Focused input state.
+Change border color when user clicks or tabs on text-input area.
 
 | Property | Description |
 |---|---|
@@ -458,7 +458,7 @@ Inline code styling.
 
 | Property | Description |
 |---|---|
-| `padding` | Inner spacing |
+| `padding` | Inner spacing, noted that in input panel, I use .decoder-form to set padding |
 
 ---
 
@@ -532,7 +532,7 @@ Code or ASCII art display area.
 | `font-size` | Text size |
 | `line-height` | Line spacing |
 | `min-height` | Minimum height |
-| `overflow: auto` | Enables scrolling |
+| `overflow: auto` | Grow with the height of output text |
 | `white-space: pre` | Preserves formatting |
 
 ---

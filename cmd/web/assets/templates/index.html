@@ -29,7 +29,7 @@
     </header>
 
     <section class="panel">
-      <form class="form" action="/decoder" method="post">
+      <form class="decoder-form" action="/decoder" method="post">
         <div class="modes">
           <label class="radio">
             <input type="radio" name="mode" value="decode" {{if eq .Mode "decode" }}checked{{end}} />
@@ -41,9 +41,9 @@
           </label>
         </div>
 
-        <label class="label" for="data">Your string</label>
-        <textarea id="data" name="data" class="input" placeholder='Example: [5 #][5 -_]-[5 #]' rows="6"
-          spellcheck="false" autocomplete="off">{{.Input}}</textarea>
+        <label class="field-label">Your string</label>
+        <textarea name="data" class="input" placeholder='Example: [5 #][5 -_]-[5 #]' rows="6" spellcheck="false"
+          autocomplete="off">{{.Input}}</textarea>
 
         <div class="actions">
           <button class="btn" type="submit">Generate</button>

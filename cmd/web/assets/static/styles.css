@@ -146,7 +146,7 @@ body {
   overflow: hidden;
 }
 
-.form {
+.decoder-form {
   padding: 16px
 }
 
@@ -175,7 +175,7 @@ body {
   color: var(--muted)
 }
 
-.label {
+.field-label {
   display: block;
   margin: 6px 0 8px;
   color: var(--muted);
