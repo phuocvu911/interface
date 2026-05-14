@@ -34,7 +34,7 @@ Applies styles to all elements.
 
 | Property | Description |
 |---|---|
-| `box-sizing: border-box` | Includes padding and borders inside width/height calculations |
+| `box-sizing: border-box` | Includes padding and borders inside width/height calculations of content area. So if CA is 100px, if it has padding and border, it stay 100px |
 
 ---
 
@@ -85,10 +85,10 @@ Main page container.
 
 | Property | Description |
 |---|---|
-| `width` | Responsive container width |
+| `width` | Responsive container width, so it fit mobile screen also |
 | `margin` | Centers container |
 | `display: flex` | Uses Flexbox |
-| `flex-direction: column` | Stacks children vertically |
+| `flex-direction: column` | Stacks sections vertically |
 | `gap` | Space between children |
 
 ---
@@ -228,7 +228,7 @@ Rounded badge/pill.
 
 ## `.code-200 .pill`
 
-Success style.
+OK style.
 
 | Property | Description |
 |---|---|
@@ -239,7 +239,7 @@ Success style.
 
 ## `.code-202 .pill`
 
-Processing style.
+Accepted style.
 
 | Property | Description |
 |---|---|
@@ -250,7 +250,7 @@ Processing style.
 
 ## `.code-400 .pill`
 
-Error style.
+Bad Request style.
 
 | Property | Description |
 |---|---|
@@ -326,6 +326,8 @@ Custom radio container.
 ---
 
 ## `.radio span`
+
+Custom Decode/Encode text
 
 | Property | Description |
 |---|---|
