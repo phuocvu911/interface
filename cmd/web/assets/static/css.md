@@ -226,6 +226,8 @@ Rounded badge/pill.
 
 # Status Variants
 
+The .pill changes color based on the HTTP status code returned by the server.
+
 ## `.code-200 .pill`
 
 OK style.
