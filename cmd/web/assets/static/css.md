@@ -273,7 +273,7 @@ Card/panel container.
 | `border` | Subtle border |
 | `border-radius` | Rounded corners |
 | `box-shadow` | Shadow effect |
-| `overflow: hidden` | Hides overflow |
+| `overflow: auto` | Auto overflow for input text area |
 
 ---
 

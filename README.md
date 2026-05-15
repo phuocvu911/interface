@@ -49,6 +49,7 @@ The text box supports **multiple lines**. The server processes input **line-by-l
 - **Decode**: each line is decoded independently. If a line is invalid, that output line becomes the literal `Error`.
   - If **any** line fails to decode, `POST /decoder` returns **400 Bad Request** (and the output still shows a mix of decoded lines and `Error` lines).
   - If **all** lines decode successfully, it returns **202 Accepted**.
+  - **Empty lines** go through the error handling, since many arts need blank lines inbetween.
 - **Encode**: each line is encoded independently and `POST /decoder` returns **202 Accepted**. `Encode()` did not return any error, so if the user's input has nothing to compress, the output is **identical** with the input, also no `Error` got caught.
 
 ## Design Notes

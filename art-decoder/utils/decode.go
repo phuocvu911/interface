@@ -9,7 +9,7 @@ import (
 // decode expands encoded art notation into plain text.
 func Decode(input string) (string, error) {
 	if len(input) == 0 {
-		return "", fmt.Errorf("input line is empty")
+		return "", nil
 	}
 	var result strings.Builder
 
