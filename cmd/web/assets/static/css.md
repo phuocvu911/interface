@@ -103,7 +103,7 @@ Top header container.
 |---|---|
 | `display: flex` | Flex layout |
 | `align-items` | Vertical alignment |
-| `justify-content` | Horizontal spacing |
+| `justify-content` | Horizontal spacing, space-between so .brand and .status children keeps to the left and right |
 | `gap` | Space between elements |
 
 ---
