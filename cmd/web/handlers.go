@@ -61,7 +61,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 			Input:      input,
 			StatusCode: http.StatusBadRequest,
 			StatusText: http.StatusText(http.StatusBadRequest),
-			Error:      "Malformed query: missing or invalid mode.",
+			Error:      "Missing or invalid mode.",
 		})
 		return
 	}
@@ -79,7 +79,7 @@ func decoderHandler(w http.ResponseWriter, r *http.Request) {
 				Mode:       mode,
 				StatusCode: http.StatusBadRequest,
 				StatusText: http.StatusText(http.StatusBadRequest),
-				Error:      "Malformed query: missing input.",
+				Error:      "Missing input.",
 			})
 			return
 		}
