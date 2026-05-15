@@ -57,3 +57,4 @@ The text box supports **multiple lines**. The server processes input **line-by-l
 - `POST /decoder` handles both decoding and encoding functionality. The `decoderHandler` function receives mode data from the form and decides which operation to perform.
 - The result of `POST /decoder` is rendered and appended to the mainpage. In other words, there is no `GET /decoder`.
 - The HTML and CSS file is baked into binary and being held in `embed.FS` object (got compiled at build time). It brings single-file deployment (`art-interface` can be run anywhere), no missing file errors, faster read and tamper-proof for those UI assets.
+- The **Server** has some `Timeout` fields so be mindful if users have bad internet connection.
