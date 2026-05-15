@@ -134,7 +134,7 @@ Logo styling.
 | `height` | Logo height |
 | `border-radius` | Rounded corners |
 | `display: grid` | Grid layout |
-| `place-items: center` | Centers content |
+| `place-items: center` | Centers content "Art"|
 | `background` | Gradient background |
 | `color` | Text color |
 | `font-weight` | Bold text |
