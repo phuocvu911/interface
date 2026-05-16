@@ -38,6 +38,10 @@ func Decode(input string) (string, error) {
 				return "", fmt.Errorf("empty pattern")
 			}
 
+			if strings.Contains(pattern, "[") {
+				return "", fmt.Errorf("nested bracket not allowed")
+			}
+
 			//dont use strings.Repeat to avoid unnecessary memory allocation.
 			for range count {
 				result.WriteString(pattern)
